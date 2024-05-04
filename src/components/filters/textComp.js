@@ -21,7 +21,6 @@ const TextFieldComponent = ({ name, type }) => {
   };
   return (
     <div>
-      <InputLabel id="demo-multiple-chip-label">{type}</InputLabel>
       <TextField
         className="inputFilter"
         id="outlined-search"

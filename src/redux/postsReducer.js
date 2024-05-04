@@ -39,20 +39,20 @@ const helperApplyFilter = (data, appliedFilters) => {
   }
 
   // Filter by minExp
-  if (appliedFilters.minExp !== null) {
+  if (appliedFilters.minExp) {
     filteredData = filteredData.filter(
       (item) => appliedFilters.minExp < item.minExp
     );
   }
 
-  if (appliedFilters.minJdSalary !== null) {
+  if (appliedFilters.minJdSalary) {
     filteredData = filteredData.filter(
       (item) => appliedFilters.minJdSalary < item.minJdSalary
     );
   }
 
-  if (appliedFilters.companyName !== "") {
-    const companyName = appliedFilters.companyName.toLowerCase();
+  if (appliedFilters.companyName.trim().length > 0) {
+    const companyName = appliedFilters.companyName.trim().toLowerCase();
     filteredData = filteredData.filter((item) =>
       item?.companyName?.toLowerCase().includes(companyName)
     );
@@ -60,11 +60,11 @@ const helperApplyFilter = (data, appliedFilters) => {
 
   // Filter by remote
   if (appliedFilters.remote !== null) {
-    filteredData = filteredData.filter((item) =>
-      appliedFilters.remote === "Remote"
-        ? item.location === "remote"
-        : item.location !== "remote"
-    );
+    if (appliedFilters.remote === "on-site") {
+      filteredData = filteredData.filter((item) => item.location !== "remote");
+    } else if (appliedFilters.remote === "remote") {
+      filteredData = filteredData.filter((item) => item.location === "remote");
+    }
   }
 
   return filteredData;
