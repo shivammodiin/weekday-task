@@ -15,6 +15,7 @@ const initialState = {
     minExp: null,
     minJdSalary: null,
     remote: null,
+    companyName: "",
   },
   totalCount: 0,
   loading: false,
@@ -47,6 +48,13 @@ const helperApplyFilter = (data, appliedFilters) => {
   if (appliedFilters.minJdSalary !== null) {
     filteredData = filteredData.filter(
       (item) => appliedFilters.minJdSalary < item.minJdSalary
+    );
+  }
+
+  if (appliedFilters.companyName !== "") {
+    const companyName = appliedFilters.companyName.toLowerCase();
+    filteredData = filteredData.filter((item) =>
+      item?.companyName?.toLowerCase().includes(companyName)
     );
   }
 

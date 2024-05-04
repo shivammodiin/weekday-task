@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "./redux/actions";
 import JobCard from "./components/jobCard";
 import "./assets/css/App.css";
-import Filters from "./components/filters";
+import Filters from "./components/filters/filters";
 
 const InfiniteScroll = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -58,7 +58,7 @@ const InfiniteScroll = () => {
       </div>
 
       {postsData?.length <= 0 && page * 10 < totalCount && (
-        <div>Applied filter data not available searching...</div>
+        <div>Getting posts...</div>
       )}
       {page * 10 > totalCount && !loading && (
         <div>You reached last post...</div>

@@ -6,6 +6,7 @@ import {
   Button,
   Chip,
   Grid,
+  Box,
 } from "@mui/material";
 
 import "../assets/css/jobCard.css";
@@ -84,12 +85,19 @@ function JobCard({
             <Typography variant="subtitle2" gutterBottom>
               <strong>About us</strong>
             </Typography>
-            <Typography variant="body2" className="desciption" component="p">
-              {description}{" "}
+            <Typography
+              variant="body2"
+              className={`${isExpanded ? "" : "mask__image"}`}
+              component="p"
+              gutterBottom
+            >
+              {description}
+            </Typography>
+            <Box className="job-card-description-more">
               <span className="show__more" onClick={toggleDescription}>
                 {isExpanded ? "Show Less" : "Show More"}
               </span>
-            </Typography>
+            </Box>
           </>
         )}
 

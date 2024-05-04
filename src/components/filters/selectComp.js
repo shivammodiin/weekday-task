@@ -8,8 +8,8 @@ import {
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { filterSelectedData } from "../redux/actions";
-import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
+import { filterSelectedData } from "../../redux/actions";
+import capitalizeFirstLetter from "../../utils/capitalizeFirstLetter";
 
 export default function SelectComponent({
   filterData,
@@ -86,7 +86,7 @@ export default function SelectComponent({
         onChange={handleChange}
         input={<OutlinedInput id="select-multiple-chip" />}
         renderValue={(selected) => renderSelectedOptions(selected)}
-        style={{ width: "100%" }}
+        className="inputFilter"
         MenuProps={{
           PaperProps: {
             style: {

@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
-import "../assets/css/filters.css";
+import "../../assets/css/filters.css";
 import SelectComponent from "./selectComp";
+import TextFieldComponent from "./textComp";
 
 const Filters = () => {
   const MinimumExperienceData = [
@@ -43,6 +44,7 @@ const Filters = () => {
         filterData={MinimumBasePay}
       />
       <SelectComponent name="remote" type="Remote" filterData={isItRemote} />
+      <TextFieldComponent type="Company Name" name="companyName" />
     </div>
   );
 };
