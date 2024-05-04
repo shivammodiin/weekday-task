@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPosts } from "./redux/actions";
 import JobCard from "./components/jobCard";
 import "./assets/css/App.css";
+import Filters from "./components/filters";
 
 const InfiniteScroll = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -46,6 +47,7 @@ const InfiniteScroll = () => {
 
   return (
     <div className="main-container">
+      <Filters />
       <div className="posting__container">
         {data.map((item) => (
           <div key={item.jdUid} className="posting__card">

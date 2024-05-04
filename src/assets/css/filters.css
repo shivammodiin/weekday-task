@@ -1,0 +1,21 @@
+.filter__main{
+    display: grid;
+    grid-gap: 10px; 
+    grid-template-columns: repeat(1, 1fr);
+  
+    /* Tablet devices */
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      grid-gap: 20px; 
+    }
+  
+    /* Full screen */
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 30px; 
+    }
+  }
+
+  .filter__main{
+    margin-bottom: 15px;
+  }
