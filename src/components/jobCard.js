@@ -20,7 +20,7 @@ function JobCard({
   logoUrl,
   maxJdSalary,
   minJdSalary,
-  salaryCurrencyCode,
+  salaryCurrencyCode = "",
 }) {
   const shortDescription = jobDetailsFromCompany?.slice(0, 300) + "...";
   const [description, setDescription] = useState(shortDescription);
@@ -71,7 +71,7 @@ function JobCard({
             )}
           </Grid>
         </Grid>
-        {minJdSalary && maxJdSalary && (
+        {(minJdSalary || maxJdSalary) && (
           <Typography variant="subtitle1" gutterBottom>
             Estimated Salary: {handleSalaryValue(minJdSalary, maxJdSalary)}
           </Typography>

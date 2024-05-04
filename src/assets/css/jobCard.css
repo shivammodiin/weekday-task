@@ -16,6 +16,7 @@
   }
   .company__logo {
     height:80px;
+    max-width: 3em;
   }
   
   .about__company {

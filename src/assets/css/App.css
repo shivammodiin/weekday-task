@@ -30,3 +30,9 @@ body {
     grid-gap: 30px; 
   }
 }
+
+
+.loader {
+  text-align: center;
+  margin-top: 15px;
+}
