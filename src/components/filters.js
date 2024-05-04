@@ -14,21 +14,22 @@ const Filters = () => {
       .map((_, index) => 10 * (index + 1)),
   ];
 
-  const roles = ["Front end", "Back end"];
+  const filterData = useSelector((state) => state.posts.filtersOption);
   const isItRemote = ["Remote", "On-site"];
+  if (!filterData.locations) return;
   return (
     <div className="filter__main">
       <SelectComponent
         type="Roles"
         multiSelect
         name="jobRole"
-        filterData={[...roles]}
+        filterData={[...filterData.roles]}
       />
       <SelectComponent
         type="Locations"
         name="location"
         multiSelect
-        filterData={[...roles]}
+        filterData={[...filterData.locations]}
       />
       <SelectComponent
         type="Minimum Experience"

@@ -2,7 +2,13 @@ import {
   FETCH_DATA_SUCCESS,
   FETCH_DATA_FAILURE,
   FETCH_DATA_START,
+  SET_FILTER_DATA,
 } from "./types";
+
+export const filterSelectedData = (data) => ({
+  type: SET_FILTER_DATA,
+  payload: data,
+});
 
 export const fetchDataSuccess = (data) => ({
   type: FETCH_DATA_SUCCESS,
@@ -34,7 +40,7 @@ export const fetchPosts = (page) => async (dispatch) => {
       requestOptions
     );
     const data = await response.json();
-    dispatch(fetchDataSuccess(data.jdList));
+    dispatch(fetchDataSuccess(data));
   } catch (error) {
     console.error("Error fetching data:", error);
     dispatch(fetchDataFailure());

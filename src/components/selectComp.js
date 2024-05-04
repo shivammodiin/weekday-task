@@ -8,6 +8,8 @@ import {
 } from "@mui/material";
 import { useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
+import { filterSelectedData } from "../redux/actions";
+import capitalizeFirstLetter from "../utils/capitalizeFirstLetter";
 
 export default function SelectComponent({
   filterData,
@@ -21,19 +23,34 @@ export default function SelectComponent({
 
   const handleChange = (event) => {
     const { value } = event.target;
+    dispatch(filterSelectedData({ name, value }));
     setSelectFilterValue(value);
   };
 
-  function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  const handleDelete = (e) => {
+    const clonedSelectedFilterValue = [...selectFilterValue];
+    const index = clonedSelectedFilterValue.indexOf(e);
+    if (index > -1) {
+      clonedSelectedFilterValue.splice(index, 1);
+    }
+    const filterValue = [...clonedSelectedFilterValue];
+    dispatch(filterSelectedData({ name, value: filterValue }));
+    setSelectFilterValue(filterValue);
+  };
 
   const renderSelectedOptions = (selected) => {
     if (!!multiSelect) {
       return (
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
           {selected.map((value) => (
-            <Chip key={value} label={value} />
+            <Chip
+              key={value}
+              onMouseDown={(event) => {
+                event.stopPropagation();
+              }}
+              label={capitalizeFirstLetter(value)}
+              onDelete={() => handleDelete(value)}
+            />
           ))}
         </Box>
       );

@@ -8,7 +8,8 @@ import Filters from "./components/filters";
 
 const InfiniteScroll = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const data = useSelector((state) => state.posts.postsData);
+  const postsData = useSelector((state) => state.posts.filteredData);
+  const totalCount = useSelector((state) => state.posts.totalCount || 11);
   const loading = useSelector((state) => state.posts.loading);
   const dispatch = useDispatch();
   const [page, setPage] = useState(1);
@@ -29,7 +30,7 @@ const InfiniteScroll = () => {
     };
     const handleObserver = (entities) => {
       const target = entities[0];
-      if (target.isIntersecting) {
+      if (target.isIntersecting && page * 10 < totalCount) {
         setPage((prevPage) => prevPage + 1);
       }
     };
@@ -49,12 +50,19 @@ const InfiniteScroll = () => {
     <div className="main-container">
       <Filters />
       <div className="posting__container">
-        {data.map((item) => (
+        {postsData.map((item) => (
           <div key={item.jdUid} className="posting__card">
             <JobCard {...item} />
           </div>
         ))}
       </div>
+
+      {postsData?.length <= 0 && page * 10 < totalCount && (
+        <div>Applied filter data not available searching...</div>
+      )}
+      {page * 10 > totalCount && !loading && (
+        <div>You reached last post...</div>
+      )}
 
       {loading && (
         <div className="loader">
