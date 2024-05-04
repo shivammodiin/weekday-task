@@ -18,6 +18,7 @@ function JobCard({
   jobRole,
   location,
   minExp,
+  jdLink,
   logoUrl,
   maxJdSalary,
   minJdSalary,
@@ -110,7 +111,14 @@ function JobCard({
           </>
         )}
         <Button className="easy__apply" variant="contained" color="primary">
-          ⚡ Easy Apply
+          <a
+            className="job__apply__link"
+            href={jdLink}
+            target="_blank"
+            rel="noreferrer"
+          >
+            ⚡ Easy Apply
+          </a>
         </Button>
         <Button className="referral__ask" variant="contained" color="secondary">
           Unlock referral asks

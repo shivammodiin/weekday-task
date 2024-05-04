@@ -54,3 +54,8 @@
       color: #fff ;
     }
   }
+
+  .job__apply__link{
+    text-decoration: none;
+    color: #000;
+  }

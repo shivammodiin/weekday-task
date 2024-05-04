@@ -8,8 +8,9 @@ import {
 const initialState = {
   postsData: [],
   filteredData: [],
-  filtersOption: {},
+  filtersOption: {}, // Stores options for filters like locations and job roles
   appliedFilters: {
+    // Stores currently applied filters
     location: [],
     jobRole: [],
     minExp: null,
@@ -17,10 +18,11 @@ const initialState = {
     remote: null,
     companyName: "",
   },
-  totalCount: 0,
+  totalCount: 0, // Total count of posts
   loading: false,
 };
 
+// Helper function to apply filters to the data
 const helperApplyFilter = (data, appliedFilters) => {
   let filteredData = data;
 
@@ -31,26 +33,28 @@ const helperApplyFilter = (data, appliedFilters) => {
     );
   }
 
-  // Filter by jobRoles
+  // Filter by job roles
   if (appliedFilters.jobRole.length > 0) {
     filteredData = filteredData.filter((item) =>
       appliedFilters.jobRole.includes(item.jobRole)
     );
   }
 
-  // Filter by minExp
+  // Filter by minimum experience
   if (appliedFilters.minExp) {
     filteredData = filteredData.filter(
       (item) => appliedFilters.minExp < item.minExp
     );
   }
 
+  // Filter by minimum job description salary
   if (appliedFilters.minJdSalary) {
     filteredData = filteredData.filter(
       (item) => appliedFilters.minJdSalary < item.minJdSalary
     );
   }
 
+  // Filter by company name
   if (appliedFilters.companyName.trim().length > 0) {
     const companyName = appliedFilters.companyName.trim().toLowerCase();
     filteredData = filteredData.filter((item) =>
@@ -58,7 +62,7 @@ const helperApplyFilter = (data, appliedFilters) => {
     );
   }
 
-  // Filter by remote
+  // Filter by remote option
   if (appliedFilters.remote !== null) {
     if (appliedFilters.remote === "on-site") {
       filteredData = filteredData.filter((item) => item.location !== "remote");
