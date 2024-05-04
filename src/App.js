@@ -1,33 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { CircularProgress } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-
-import "./assets/css/App.css";
-import JobCard from "./components/jobCard";
 import { fetchPosts } from "./redux/actions";
+import JobCard from "./components/jobCard";
+import "./assets/css/App.css";
 
-function App() {
+const InfiniteScroll = () => {
+  const [page, setPage] = useState(1);
+  const data = useSelector((state) => state.posts.postsData);
+  const loading = useSelector((state) => state.posts.loading);
   const dispatch = useDispatch();
-  const postsData = useSelector((state) => state?.posts?.postsData);
-  console.log("postsData", postsData);
+
   useEffect(() => {
-    dispatch(fetchPosts(1));
-  }, [dispatch]);
+    console.log("API call");
+    dispatch(fetchPosts(page));
+  }, []);
+
   return (
     <div className="main-container">
-      {/* Filters Will Come Here */}
       <div className="posting__container">
-        {Array(10)
-          .fill("")
-          .map((_, i) => {
-            return (
-              <div key={i} className="job__card">
-                <JobCard />
-              </div>
-            );
-          })}
+        {data.map((item) => (
+          <div key={item.jdUid} className="posting__card">
+            <JobCard {...item} />
+          </div>
+        ))}
       </div>
+
+      {loading && (
+        <div className="loader">
+          <CircularProgress />
+        </div>
+      )}
     </div>
   );
-}
+};
 
-export default App;
+export default InfiniteScroll;
